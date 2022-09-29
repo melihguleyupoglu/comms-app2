@@ -1,0 +1,93 @@
+<audio #incoming id="incoming" src="../../../assets/sounds/incoming.mp3" loop></audio>
+<audio #outgoing id="outgoing" src="../../../assets/sounds/outgoing.mp3" loop></audio>
+<audio #dmtf id="dmtf" src="../../../assets/sounds/dmtf.mp3" loop></audio>
+
+  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Click to run the app.</button>
+
+<ng-template #content let-modal>
+
+
+
+
+    
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Make a Phone Call</h4>
+        
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          
+           
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">       
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Logged in as : <span>6002</span></label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="float-right">Status: <span class="fa fa-signal ml-4"></span> <span
+                            class="ml-3">{{ sipStatus }}</span></label>
+                </div>
+                
+        
+            </div>
+
+            <div class="col-md-">
+                <div class="form-group">
+                    
+                </div>
+            </div>
+            <div class="col-md-5">
+                {{ callStatus.currentStatus }}
+            </div>
+            <!-- <div class="col-md-3">
+                <div class="form-group">
+                    <button class="btn btn-{{ callStatus?.isCalling() ? 'danger' : 'success' }} btn-outline btn-lg float-right" (click)="makeCall()" [disabled]="!isReady"><i
+                            class="fa fa-phone"></i> <span> Call</span></button>
+                </div>
+            </div> -->
+
+        </div>
+      <label for="lang">Phone</label>
+      <select name="phones" id="lang">
+        <option value= >{{selectedPhoneNumber}}</option>
+      </select>
+      
+
+        <div class="row d-flex justify-content-center" >
+            <div class="col-md-2 text-center" [hidden]="!isEstablished()">
+                {{ timer | date:'H:mm:ss':'UTC' }}
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center" >
+            <div class="col-md-1">
+                <button class="btn bnt-sm rounded-lg" (click)="rtcSession.hold()" [disabled]="!isEstablished()"><i class="fa fa-pause"></i></button>
+            </div>
+            <div class="col-md-1">
+                 <!-- [disabled]="!isEstablished()" -->
+                <button class="btn bnt-sm rounded-lg" (click)="onMute()" [disabled]="!rtcSession"><i class="fa fa-{{ isMuted() ? 'microphone-slash' : 'microphone' }}"></i></button>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center" >
+            <div class="col-md-3">
+                 <button class="btn btn-{{ callStatus.isCalling() ? 'danger' : 'success' }} btn-outline btn-lg w-100" value="rtcSession" (click)="makeCall() " [disabled]="!isReady"><i
+                            class="fa fa-phone"></i> <span> Call</span></button>
+            </div>
+        </div>
+            <<div class="row d-flex justify-content-center" >
+                <div class="col-md-3">
+                     <button style="background-color:red ;" class="btn btn-{{ isInProgress() ? 'danger' : 'success' }} btn-outline btn-lg w-100" value="rtcSession" (click)="callTerminated()" [disabled]="!callStatus.inProgress"><i
+                                class="fa fa-phone"></i> <span> Hangup</span></button>
+                </div>
+            </div>
+        
+
+
+    </div>
+
+</ng-template>
+
