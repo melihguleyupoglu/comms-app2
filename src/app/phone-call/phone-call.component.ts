@@ -82,28 +82,19 @@ export class PhoneCallComponent implements OnInit, AfterViewInit {
     initSip() {
 
 
-        var socket = new JsSIP.WebSocketInterface('ws://192.168.1.126:8089/ws');
+        var socket = new JsSIP.WebSocketInterface('ws://YOUR_IP:8089/ws');
 
 
         const configuration = {
             sockets: [ socket ],
-            ws_servers: 'ws://192.168.126:8089/ws',
-            uri: '6002@192.168.1.126',
+            ws_servers: 'ws://YOUR_IP:8089/ws',
+            uri: '6002@YOUR_IP',
             password: '6002'
         };
 
-        const configuration2 = {
-            sockets: [ socket ],
-            ws_servers: 'ws://192.168.1.126',
-            uri: '6002@192.168.1.126',
-            password: '6002'
-        }
-
-
         this.sipUA = new JsSIP.UA(configuration);
         
-        
-
+  
         var eventHandlers = {
             'progress': function(e) {
               console.log('call is in progress');
@@ -220,7 +211,6 @@ export class PhoneCallComponent implements OnInit, AfterViewInit {
     
     async makeCall() {
 
-
         var eventHandlers = {
             'progress': function(e) {
               console.log('call is in progress');
@@ -254,7 +244,7 @@ export class PhoneCallComponent implements OnInit, AfterViewInit {
         const number = this.phoneNumbers[0]['id'];
 
 
-        this.rtcSession = this.sipUA.call("6003@192.168.1.126", callOptions);
+        this.rtcSession = this.sipUA.call("6003@YOUR_IP, callOptions);
 
 
         //remote audio part.
